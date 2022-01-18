@@ -1,0 +1,117 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+?>
+<?php
+/** @var $block \Magento\Framework\View\Element\Template */
+/** @var $escaper \Magento\Framework\Escaper */
+/** @var $configProvider \Magento\Search\ViewModel\ConfigProvider */
+$configProvider = $block->getData('configProvider');
+/** @var $helper \Magento\Search\Helper\Data */
+$helper = $configProvider->getSearchHelperData();
+$allowedSuggestion = $configProvider->isSuggestionsAllowed();
+$quickSearchUrl = $allowedSuggestion ? $escaper->escapeUrl($helper->getSuggestUrl()) : '';
+?>
+<div class="block block-search" name="block-search">
+    <div class="block block-title"><strong><?= $escaper->escapeHtml(__('Search')) ?></strong></div>
+    <div class="block block-content">
+        <form class="form minisearch" id="search_mini_form"
+              action="<?= $escaper->escapeUrl($helper->getResultUrl()) ?>" method="get">
+            <div class="field search">
+                <label class="label" for="search" data-role="minisearch-label">
+                    <span><?= $escaper->escapeHtml(__('Search')) ?></span>
+                </label>
+                <div class="control">
+                    <input id="search"
+                           data-mage-init='{
+                            "quickSearch": {
+                                "formSelector": "#search_mini_form",
+                                "url": "<?= /* @noEscape */ $quickSearchUrl ?>",
+                                "destinationSelector": "#search_autocomplete",
+                                "minSearchLength": "<?= $escaper->escapeHtml($helper->getMinQueryLength()) ?>"
+                            }
+                        }'
+                           type="text"
+                           name="<?= $escaper->escapeHtmlAttr($helper->getQueryParamName()) ?>"
+                           value="<?= /* @noEscape */ $helper->getEscapedQueryText() ?>"
+                           placeholder="<?= $escaper->escapeHtmlAttr(__('Enter keyword')) ?>"
+                           class="input-text"
+                           maxlength="<?= $escaper->escapeHtmlAttr($helper->getMaxQueryLength()) ?>"
+                           role="combobox"
+                           aria-haspopup="false"
+                           aria-autocomplete="both"
+                           autocomplete="off"
+                           aria-expanded="false"/>
+
+                           
+                    <div id="search_autocomplete" class="search-autocomplete"></div>
+                    <?= $block->getChildHtml() ?>
+                    <span class="my-boder-right"></span>
+                    <select name="cars" id="cars" class="select">
+                        <option value="volvo">All Category</option>
+                        <option value="saab">Saab</option>
+                        <option value="mercedes">Mercedes</option>
+                        <option value="audi">Audi</option>
+                    </select>
+                    <!-- <div class="dropdown">
+                        <button class="dropbtn">All Categories</button>
+                        <i class="fas fa-angle-down "></i>
+                        <div class="dropdown-content">
+                            <div>
+                                <h3>Shop by Category</h3>
+                                <div>
+                                    <div>
+                                        <ul>
+                                            <li>Best Seller</li>
+                                            <li>New Arrivals</li>
+                                            <li> Sale</li>
+                                            <li>Fragrance</li>
+                                            <li>Tools & Accessories</li>  
+                                            <li>Oral Care</li>  
+                                            <li> Babies & Kids</li>      
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <ul>
+                                            <li>Hair</li>
+                                            <li>Supplements</li>
+                                            <li> Body</li>
+                                            <li>Makeup</li>
+                                            <li>Nail</li>  
+                                            <li>Skin</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <h3>Hair</h3>
+                                <div>
+                                    <ul>
+                                        <li>Shampoo</li>
+                                        <li>Conditioner</li>
+                                        <li>Hair</li>
+                                        <li>Treatment</li>
+                                        <li>Tonic</li>
+                                        <li>Styling</li>
+                                        <li>Colour</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div>
+                                <img src="http://khai.magento243.com/media/wysiwyg/iStock-1166945393_1.png" alt="">
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+            <div class="actions">
+                <button type="submit" class="search">
+                    Search
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

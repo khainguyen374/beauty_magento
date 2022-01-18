@@ -1,0 +1,129 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-login" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="logo">
+            <arguments>
+               <argument name="logo_file" xsi:type="string">images/logo-violet.png</argument>
+                <argument name="logo_width" xsi:type="number">290</argument>
+                <argument name="logo_height" xsi:type="number">60.4</argument>
+                <argument name="logo_alt" xsi:type="string">This is logo</argument>
+            </arguments>
+        </referenceBlock>
+        
+        <!-- <referenceBlock name="top.search" remove="true"/> -->  
+        <!-- <referenceBlock name="minicart" remove="true"/> -->
+        <!-- <referenceBlock name="authorization-link" remove="true" />
+        <referenceBlock name="wish-list-link" remove="true" /> -->
+        <referenceBlock name="advanced-search-link" remove="true"/>
+        <referenceBlock name="advanced-search" remove="true"/>
+        <referenceBlock name="register-link" remove="true" />
+        <referenceBlock name="my-account-link" remove="true" />
+        <referenceBlock name="header" remove="true"/>
+        <referenceBlock name="item.link.compare" remove="true" />
+        <referenceBlock name="skip_to_content" remove="true"/>
+        <referenceBlock name="navigation.sections" remove="true"/>
+        <referenceBlock name="footer.links" remove="true"/>
+        <referenceBlock name="footer.container" remove="true" />
+        <referenceBlock name="footer_links" remove="true"/>
+
+<!--        top link-->
+        <referenceBlock name="top.links">
+            <block class="Magento\Framework\View\Element\Html\Link" name="my-home-link">
+                <arguments >
+                    <argument name="label"  xsi:type="string" translate="true">HOME</argument>
+                    <argument name="path" xsi:type="string"></argument>
+                </arguments>
+            </block>
+            <block class="Magento\Framework\View\Element\Html\Link" name="category-link">
+                <arguments>
+                    <argument name="label" xsi:type="string" translate="true">CATEGORY</argument>
+                    <argument name="path" xsi:type="string">category.html</argument>
+                </arguments>
+            </block>
+            <block class="Magento\Framework\View\Element\Html\Link" name="brands-link">
+                <arguments>
+                    <argument name="label" xsi:type="string" translate="true">BRANDS</argument>
+                    <argument name="path" xsi:type="string">brands</argument>
+                </arguments>
+            </block>
+            <block class="Magento\Framework\View\Element\Html\Link" name="save-events-link">
+                <arguments>
+                    <argument name="label" xsi:type="string" translate="true">SAVE &amp; EVENTS</argument>
+                    <argument name="path" xsi:type="string">save-events</argument>
+                </arguments>
+            </block>
+            <block class="Magento\Framework\View\Element\Html\Link" name="join-link">
+                <arguments>
+                    <argument name="label" xsi:type="string" translate="true">JOIN US</argument>
+                    <argument name="path" xsi:type="string">join-us</argument>
+                </arguments>
+            </block>
+            <block class="Magento\Framework\View\Element\Html\Link" name="contact-link">
+                <arguments>
+                    <argument name="label" xsi:type="string" translate="true">CONTACT US</argument>
+                    <argument name="path" xsi:type="string">contact-us</argument>
+                </arguments>
+            </block>
+            <block class="Magento\Framework\View\Element\Html\Link" name="store-link">
+                <arguments>
+                    <argument name="label" xsi:type="string" translate="true">STORE LOCATOR</argument>
+                    <argument name="path" xsi:type="string">store-locator</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+
+        <container name="slogan" htmlTag="p" htmlClass="slogan" htmlId="slogan" >
+            <block class="Magento\Cms\Block\Block" name="slogan-beauty-language">
+                <arguments>
+                    <argument name="block_id" xsi:type="string">slogan-beauty-language</argument>
+                </arguments>
+            </block>
+        </container>
+        <move element="slogan" destination="header.panel" before="-"/>
+
+        <referenceBlock name="header-wrapper">
+            <container name="custom-header-content" htmlTag="div" htmlClass="custom-header-content" htmlId="custom-header-content" >
+            </container>  
+        </referenceBlock>
+                
+        <move element="wish-list-link" destination="custom-header-content" before="-"/>
+        <move element="authorization-link" destination="custom-header-content" before="-"/>
+        <move element="minicart" destination="custom-header-content" after="-"/>
+
+        <referenceContainer name="main" >
+            <container name="custom-newsletter" htmlTag="div" htmlClass="custom-newsletter" htmlId="custom-newsletter" >
+                <block class="Magento\Newsletter\Block\Subscribe" name="form.subscribe" as="subscribe" before="-" template="Magento_Newsletter::subscribe.phtml" ifconfig="newsletter/general/active"/>
+            </container>  
+
+        </referenceContainer>
+
+            <referenceBlock name="footer_links">
+                <referenceBlock name="privacy-policy-link" remove="true" />
+                <referenceBlock name="search-term-popular-link" remove="true" />
+                <referenceBlock name="contact-us-link" remove="true" />
+                <referenceBlock name="catalog-search-advanced-link" remove="true" />
+                <referenceBlock name="sales-guest-form-link" remove="true" />
+                <referenceBlock name="blog-link" remove="true" />
+                <referenceBlock name="sitemap-link" remove="true" />
+            </referenceBlock>
+
+
+        <container name="footer-beauty" htmlTag="div" htmlClass="footer-beauty" htmlId="footer-beauty" >
+            <block class="Magento\Cms\Block\Block" name="footer-menu">
+                <arguments>
+                    <argument name="block_id" xsi:type="string">footer-menu</argument>
+                </arguments>
+            </block>
+        </container>
+        <move element="footer-beauty" destination="footer" before="-"/>
+
+
+
+    </body>
+ </page>
